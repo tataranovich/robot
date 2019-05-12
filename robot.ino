@@ -5,51 +5,51 @@ AF_DCMotor motor2(2);
 AF_DCMotor motor3(3);
 AF_DCMotor motor4(4);
 
-int trigPin = A5;
-int echoPin = A4;
+byte trigPin = A5;
+byte echoPin = A4;
 
-void leftSpeed(int i) {
-  motor1.setSpeed(i);
-  motor2.setSpeed(i);
+void leftSpeed(byte speed) {
+  motor1.setSpeed(speed);
+  motor2.setSpeed(speed);
 }
 
-void rightSpeed(int i) {
-  motor3.setSpeed(i);
-  motor4.setSpeed(i);
+void rightSpeed(byte speed) {
+  motor3.setSpeed(speed);
+  motor4.setSpeed(speed);
 }
 
-void leftMode(int mode) {
+void leftMode(byte mode) {
   motor3.run(mode);
   motor4.run(mode);
 }
 
-void rightMode(int mode) {
+void rightMode(byte mode) {
   motor1.run(mode);
   motor2.run(mode);
 }
 
-void runForward(int speed) {
+void runForward(byte speed) {
   leftSpeed(speed);
   rightSpeed(speed);
   leftMode(BACKWARD);
   rightMode(BACKWARD);
 }
 
-void runBackward(int speed) {
+void runBackward(byte speed) {
   leftSpeed(speed);
   rightSpeed(speed);
   leftMode(FORWARD);
   rightMode(FORWARD);
 }
 
-void turnLeft(int speed) {
+void turnLeft(byte speed) {
   leftMode(FORWARD);
   rightMode(BACKWARD);
   leftSpeed(speed);
   rightSpeed(speed);
 }
 
-void turnRight(int speed) {
+void turnRight(byte speed) {
   leftMode(BACKWARD);
   rightMode(FORWARD);
   leftSpeed(speed);
@@ -83,7 +83,7 @@ void loop() {
 }
 
 int getDistance() {
-  int duration, distance;
+  int duration;
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
